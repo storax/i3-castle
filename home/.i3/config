@@ -161,16 +161,16 @@ mode "$move_mode" {
     bindsym  $down              move down
     bindsym  $up                move up
     bindsym  $right             move right
-    bindsym  1                  move container to workspace 1
-    bindsym  2                  move container to workspace 2
-    bindsym  3                  move container to workspace 3
-    bindsym  4                  move container to workspace 4
-    bindsym  5                  move container to workspace 5
-    bindsym  6                  move container to workspace 6
-    bindsym  7                  move container to workspace 7
-    bindsym  8                  move container to workspace 8
-    bindsym  9                  move container to workspace 9
-    bindsym  0                  move container to workspace 10
+    bindsym  1                  move container to workspace 1, workspace 1
+    bindsym  2                  move container to workspace 2, workspace 2
+    bindsym  3                  move container to workspace 3, workspace 3
+    bindsym  4                  move container to workspace 4, workspace 4
+    bindsym  5                  move container to workspace 5, workspace 5
+    bindsym  6                  move container to workspace 6, workspace 6
+    bindsym  7                  move container to workspace 7, workspace 7
+    bindsym  8                  move container to workspace 8, workspace 8
+    bindsym  9                  move container to workspace 9, workspace 9
+    bindsym  0                  move container to workspace 10, workspace 10
 }
 
 # Mode: resize  ----------------------------------------------------------
@@ -242,7 +242,7 @@ mode "$system_exit_mode" {
     bindcode $quitmode          mode $default
     bindcode $upmode            mode $system_mode
     # - - - - - - - - - - - - - - Key Map  - - - - - - - - - - - - - - - -
-    bindsym l                   exec --no-startup-id i3lock, mode $default
+    bindsym l                   exec --no-startup-id "i3lock -d -i ~/.img/mrrobot.png", mode $default
     bindsym e                   exec --no-startup-id "i3-msg exit", mode $default
     #bindsym s                  suspend??, mode $default
     #bindsym h                  hibernate???, mode "default"
