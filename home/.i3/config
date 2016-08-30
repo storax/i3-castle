@@ -265,7 +265,7 @@ mode "$wks_mode" {
 # Mode: system  ----------------------------------------------------------
 set $system_mode                system (e) exit (s) sound (l) lock (r) i3 restart (c) i3 reload
 set $system_exit_mode           system -> exit (l) lock (e) logout (R) restart (P) poweroff
-set $system_sound_mode          system -> sound (i) der bass muss ficken (k) psst (m) mute
+set $system_sound_mode          system -> sound (i) der bass muss ficken (k) psst (m) mute (s) spotify (p) play (i) prev (j) next
 set $system_display_mode        system -> display (i) brighter (k) darker
 
 mode "$system_mode" {
@@ -305,6 +305,10 @@ mode "$system_sound_mode" {
     bindsym  $up                exec --no-startup-id "amixer -D pulse -q sset Master 5%+ unmute; $updatebar"
     bindsym  $down              exec --no-startup-id "amixer -D pulse -q sset Master 5%- unmute; $updatebar"
     bindsym  m                  exec --no-startup-id "amixer -D pulse -q sset Master toggle; $updatebar"
+    bindsym  s                  exec spotify
+    bindsym  p                  exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+    bindsym  $left              exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+    bindsym  $right             exec --no-startup-id "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 }
 
 mode "$system_display_mode" {
