@@ -55,14 +55,14 @@ for_window [class="I3-exit"] floating enable; border 1pixel
 # i3 bar --------
 bar {
     id                      main
-    status_command          i3status
+    status_command          conky -c $HOME/.i3/conky/conkyrc
     position                top
     mode                    dock
     modifier                $mod2
     workspace_buttons       yes
     binding_mode_indicator  yes
     tray_output             primary
-
+    font pango: M+ 1m, FontAwesome, Ionicons, 10
     colors {
          background #00040f
          statusline #93a1a1

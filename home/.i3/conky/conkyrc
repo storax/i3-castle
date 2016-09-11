@@ -1,0 +1,18 @@
+###    lovelybacon.deviantart.com   ####
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 5
+total_run_times 0
+use_spacer none
+
+TEXT
+
+${if_mpd_playing}♫  ${mpd_artist} -  ${mpd_title} ${endif}      \
+   ${downspeedf wlan0} | ${upspeedf wlan0}      \
+  ${wireless_link_qual_perc wlan0}  ${wireless_essid wlan0}      \
+   ${hwmon 1 temp 1} | ${hwmon 1 temp 3}      \
+  ${exec pactl list sinks | grep '^[[:space:]]Volume:' | head -n 2 | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'}      \
+  ${time %a %b %d}     \
+  ${time %H:%M}
