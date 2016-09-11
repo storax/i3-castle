@@ -343,3 +343,4 @@ exec --no-startup-id gsettings set org.freedesktop.ibus.general.hotkey triggers 
 # -b is for daemonizing the process
 exec --no-startup-id compton -b
 exec --no-startup-id mopidy
+exec --no-startup-id conky
