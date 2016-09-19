@@ -216,7 +216,7 @@ mode "$resize_mode" {
 #}
 
 # Mode: layout  ----------------------------------------------------------
-set $layout_mode                layout (m) move (d) default (h) splith (v) splitv (e) toggle (s) stacking (w) tabbed (f) fullscreen (t) float
+set $layout_mode                layout (m) move (d) default (h) splith (v) splitv (e) toggle (s) stacking (w) tabbed (f) fullscreen (t) float (ijkl) focus (p) parent (c) child
 
 mode "$layout_mode" {
     # - - - - - - - - - - - - - - Sub Modes  - - - - - - - - - - - - - - - 
@@ -225,6 +225,12 @@ mode "$layout_mode" {
     bindcode $upmode            mode $main_mode
     bindsym m                   mode $move_mode
     # - - - - - - - - - - - - - - Key Map  - - - - - - - - - - - - - - - -
+    bindsym  $left              focus left
+    bindsym  $down              focus down
+    bindsym  $up                focus up
+    bindsym  $right             focus right
+    bindsym  p                  focus parent
+    bindsym  c                  focus child
     bindsym  f                  fullscreen, mode $default
     bindsym  d                  layout default
     bindsym  h                  layout splith
@@ -303,7 +309,7 @@ mode "$system_sound_mode" {
     bindsym  $up                exec --no-startup-id "amixer -D pulse -q sset Master 5%+ unmute; $updatebar"
     bindsym  $down              exec --no-startup-id "amixer -D pulse -q sset Master 5%- unmute; $updatebar"
     bindsym  m                  exec --no-startup-id "amixer -D pulse -q sset Master toggle; $updatebar"
-    bindsym  s                  workspace 9: music, exec $term -name ncmpcpp -e ncmpcpp
+    bindsym  s                  workspace 9: music, exec $term -name ncmpcpp -e ncmpcpp, mode $default
     bindsym  p                  exec --no-startup-id "mpc toggle"
     bindsym  $left              exec --no-startup-id "mpc prev"
     bindsym  $right             exec --no-startup-id "mpc next"
