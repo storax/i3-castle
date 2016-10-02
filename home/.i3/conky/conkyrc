@@ -3,25 +3,25 @@ out_to_x no
 out_to_console yes
 update_interval 2
 total_run_times 0
-use_spacer left
+use_spacer none
 
 TEXT
 
 [{"full_text": "${if_mpd_playing}♫  ${mpd_artist} -  ${mpd_title}${endif}", "separator_block_width": 20},
 
  {"full_text": "", "color": "\#008599", "separator": false, "separator_block_width": 10},
- {"full_text": "${downspeedf wlan0}", "color": "\#008599"},
- {"full_text": "${upspeedf wlan0}", "color": "\#008599", "separator_block_width": 20},
+ {"full_text": "${downspeedf wlan0}", "color": "\#008599", "align": "right", "min_width": 40},
+ {"full_text": "${upspeedf wlan0}", "color": "\#008599", "align": "left", "min_width": 40, "separator_block_width": 20},
  
  {"full_text": "", "color": "\#859900", "separator": false},
  ${if_match ${wireless_link_qual_perc wlan0}<60}
-   {"full_text": "${wireless_link_qual_perc wlan0}%", "color":"\#dc6900", "separator": false},
+   {"full_text": "${wireless_link_qual_perc wlan0}%", "color":"\#dc6900", "separator_block_width": 20},
  ${else}${if_match ${wireless_link_qual_perc wlan0}<80}
-   {"full_text":"${wireless_link_qual_perc wlan0}%", "color":"\#b58900", "separator": false},
+   {"full_text":"${wireless_link_qual_perc wlan0}%", "color":"\#b58900", "separator_block_width": 20},
  ${else}${if_match ${wireless_link_qual_perc wlan0}>=80}
-   {"full_text":"${wireless_link_qual_perc wlan0}%", "separator": false},
+   {"full_text":"${wireless_link_qual_perc wlan0}%", "separator_block_width": 20},
  ${endif}${endif}${endif}
- {"full_text": "${wireless_essid wlan0}", "separator_block_width": 20},
+# {"full_text": "${wireless_essid wlan0}", "separator_block_width": 20},
 
  ${if_match ${hwmon 1 temp 1}>=85}
   {"full_text": "", "color":"\#cd322f", "separator": false},
