@@ -55,7 +55,7 @@ for_window [class="I3-exit"] floating enable; border 1pixel
 # i3 bar --------
 bar {
     id                      main
-    status_command          conky -c $HOME/.i3/conky/conkyrc
+    status_command          $HOME/.i3/conky/conky.sh
     position                top
     mode                    dock
     modifier                $mod2

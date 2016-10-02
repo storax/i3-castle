@@ -1,18 +1,78 @@
-###    lovelybacon.deviantart.com   ####
-
 background no
 out_to_x no
 out_to_console yes
-update_interval 5
+update_interval 2
 total_run_times 0
-use_spacer none
+use_spacer left
 
 TEXT
 
-${if_mpd_playing}♫  ${mpd_artist} -  ${mpd_title} ${endif}      \
-   ${downspeedf wlan0} | ${upspeedf wlan0}      \
-  ${wireless_link_qual_perc wlan0}  ${wireless_essid wlan0}      \
-   ${hwmon 1 temp 1} | ${hwmon 1 temp 3}      \
-  ${exec pactl list sinks | grep '^[[:space:]]Volume:' | head -n 2 | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'}      \
-  ${time %a %b %d}     \
-  ${time %H:%M}
+[{"full_text": "${if_mpd_playing}♫  ${mpd_artist} -  ${mpd_title}${endif}", "separator_block_width": 20},
+
+ {"full_text": "", "color": "\#008599", "separator": false, "separator_block_width": 10},
+ {"full_text": "${downspeedf wlan0}", "color": "\#008599"},
+ {"full_text": "${upspeedf wlan0}", "color": "\#008599", "separator_block_width": 20},
+ 
+ {"full_text": "", "color": "\#859900", "separator": false},
+ ${if_match ${wireless_link_qual_perc wlan0}<60}
+   {"full_text": "${wireless_link_qual_perc wlan0}%", "color":"\#dc6900", "separator": false},
+ ${else}${if_match ${wireless_link_qual_perc wlan0}<80}
+   {"full_text":"${wireless_link_qual_perc wlan0}%", "color":"\#b58900", "separator": false},
+ ${else}${if_match ${wireless_link_qual_perc wlan0}>=80}
+   {"full_text":"${wireless_link_qual_perc wlan0}%", "separator": false},
+ ${endif}${endif}${endif}
+ {"full_text": "${wireless_essid wlan0}", "separator_block_width": 20},
+
+ ${if_match ${hwmon 1 temp 1}>=85}
+  {"full_text": "", "color":"\#cd322f", "separator": false},
+  {"full_text": "${hwmon 1 temp 1}℃", "color":"\#dc322f"},
+ ${else}${if_match ${hwmon 1 temp 1}>70}
+   {"full_text": "", "color":"\#b58900", "separator": false},
+   {"full_text":"${hwmon 1 temp 1}℃", "color":"\#b58900"},
+ ${else}${if_match ${hwmon 1 temp 1}<=70}
+   {"full_text": "", "separator": false},
+   {"full_text":"${hwmon 1 temp 1}℃"},
+ ${endif}${endif}${endif}
+ ${if_match ${hwmon 0 temp 1}>=85}
+   {"full_text": "${hwmon 0 temp 1}℃", "color":"\#dc322f", "separator_block_width": 20},
+ ${else}${if_match ${hwmon 0 temp 1}>70}
+   {"full_text":"${hwmon 0 temp 1}℃", "color":"\#b58900", "separator_block_width": 20},
+ ${else}${if_match ${hwmon 0 temp 1}<=70}
+   {"full_text":"${hwmon 0 temp 1}℃", "separator_block_width": 20},
+ ${endif}${endif}${endif}
+
+ {"full_text": "", "separator": false, "separator_block_width": 6},
+ {"full_text": "${exec pactl list sinks | grep '^[[:space:]]Volume:' | head -n 2 | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'}", "separator_block_width": 20},
+
+ ${if_existing /sys/class/power_supply/AC/online 1}
+  ${if_match ${battery_percent}<20}
+    {"full_text": "", "color": "\#dc322f", "separator": false, "separator_block_width": 6},
+    {"full_text": "${battery_percent}%","color":"\#dc322f", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}<50}
+    {"full_text": "", "color": "\#b58900", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#b58900", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}>=50}
+    {"full_text": "", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%", "separator_block_width": 20},
+  ${endif}${endif}${endif}
+ ${else}
+  ${if_match ${battery_percent}<20}
+    {"full_text": "", "color": "\#dc322f", "separator": false, "separator_block_width": 6},
+    {"full_text": "${battery_percent}%","color":"\#dc322f", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}<50}
+    {"full_text": "", "color": "\#cd6900", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#cd6900", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}<75}
+    {"full_text": "", "color": "\#b58900", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#b58900", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}<90}
+    {"full_text": "", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%", "separator_block_width": 20},
+  ${else}${if_match ${battery_percent}>=90}
+    {"full_text": "", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%", "separator_block_width": 20},
+  ${endif}${endif}${endif}${endif}${endif}
+ ${endif}
+
+ {"full_text": "   ${time %a %b %d}"},
+ {"full_text": "  ${time %H:%M}"}],
