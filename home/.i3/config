@@ -30,8 +30,9 @@ set $i3cibin ~/.i3ci/bin
 # force an update of the i3 status bar
 set $updatebar killall -USR1 i3status
 # wallpaper
-set $wallpaper feh --bg-fill ~/.img/mrrobot.png
+set $wallpaper feh --bg-fill ~/.img/annapuma.jpg
 
+workspace_auto_back_and_forth yes
 # ========================================================================
 #                             System Preferences
 # ========================================================================
@@ -51,6 +52,12 @@ focus_follows_mouse no
 #for_window [class="Emacs"] border 1pixel
 #for_window [title="$term"] border 1pixel
 for_window [class="I3-exit"] floating enable; border 1pixel
+
+for_window [class="Tilda"] floating enable; border 1pixel
+assign [class="Tilda"] "8: ~"
+bindsym F12 workspace "8: ~"
+
+for_window [instance="guake"] floating enable
 
 # i3 bar --------
 bar {
@@ -338,9 +345,8 @@ exec --no-startup-id $wallpaper
 # Use natural scrolling
 exec --no-startup-id synclient VertScrollDelta=-108
 
-# Make quake float
-for_window [instance="guake"] floating enable
-exec --no-startup-id guake
+# exec guake
+exec tilda
 
 # Disable ibus hotkey
 exec --no-startup-id gsettings set org.freedesktop.ibus.general.hotkey triggers []
@@ -350,3 +356,5 @@ exec --no-startup-id gsettings set org.freedesktop.ibus.general.hotkey triggers 
 exec --no-startup-id compton -b
 exec --no-startup-id mopidy
 exec --no-startup-id conky
+
+workspace "8: ~"
