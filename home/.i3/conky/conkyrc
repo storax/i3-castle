@@ -9,62 +9,56 @@ TEXT
 
 [{"full_text": "${if_mpd_playing}♫  ${mpd_artist} -  ${mpd_title}${endif}", "separator_block_width": 20},
 
- {"full_text": "", "color": "\#008599", "separator": false, "separator_block_width": 10},
- {"full_text": "${downspeedf wlan0}", "color": "\#008599", "align": "right", "min_width": 40},
- {"full_text": "${upspeedf wlan0}", "color": "\#008599", "align": "left", "min_width": 40, "separator_block_width": 20},
- 
- {"full_text": "", "color": "\#859900", "separator": false},
+ {"full_text": "", "color": "\#7f9f7f", "separator": false},
+ {"full_text": "${downspeedf wlan0}", "color": "\#7f9f7f", "align": "right", "separator": false},
+ {"full_text": "", "color": "\#cc9393", "separator": false},
+ {"full_text": "${upspeedf wlan0}", "color": "\#cc9393", "separator_block_width": 20},
+
+ {"full_text": "", "color": "\#7f9f7f", "separator": false},
  ${if_match ${wireless_link_qual_perc wlan0}<60}
-   {"full_text": "${wireless_link_qual_perc wlan0}%", "color":"\#dc6900", "separator_block_width": 20},
+ {"full_text": "${wireless_link_qual_perc wlan0}%", "color":"\#dca3a3", "separator_block_width": 20},
  ${else}${if_match ${wireless_link_qual_perc wlan0}<80}
-   {"full_text":"${wireless_link_qual_perc wlan0}%", "color":"\#b58900", "separator_block_width": 20},
+ {"full_text":"${wireless_link_qual_perc wlan0}%", "color":"\#ffcfaf", "separator_block_width": 20},
  ${else}${if_match ${wireless_link_qual_perc wlan0}>=80}
    {"full_text":"${wireless_link_qual_perc wlan0}%", "separator_block_width": 20},
  ${endif}${endif}${endif}
 # {"full_text": "${wireless_essid wlan0}", "separator_block_width": 20},
 
  ${if_match ${hwmon 1 temp 1}>=85}
-  {"full_text": "", "color":"\#cd322f", "separator": false},
-  {"full_text": "${hwmon 1 temp 1}℃", "color":"\#dc322f"},
+   {"full_text": "", "color":"\#cc9393", "separator": false},
+   {"full_text": "${hwmon 1 temp 1}℃", "color":"\#cc9393", "separator_block_width": 20},
  ${else}${if_match ${hwmon 1 temp 1}>70}
-   {"full_text": "", "color":"\#b58900", "separator": false},
-   {"full_text":"${hwmon 1 temp 1}℃", "color":"\#b58900"},
+   {"full_text": "", "color":"\#ffcfaf", "separator": false},
+   {"full_text":"${hwmon 1 temp 1}℃", "color":"\#ffcfaf", "separator_block_width": 20},
  ${else}${if_match ${hwmon 1 temp 1}<=70}
    {"full_text": "", "separator": false},
-   {"full_text":"${hwmon 1 temp 1}℃"},
+   {"full_text":"${hwmon 1 temp 1}℃", "separator_block_width": 20},
  ${endif}${endif}${endif}
- ${if_match ${hwmon 0 temp 1}>=85}
-   {"full_text": "${hwmon 0 temp 1}℃", "color":"\#dc322f", "separator_block_width": 20},
- ${else}${if_match ${hwmon 0 temp 1}>70}
-   {"full_text":"${hwmon 0 temp 1}℃", "color":"\#b58900", "separator_block_width": 20},
- ${else}${if_match ${hwmon 0 temp 1}<=70}
-   {"full_text":"${hwmon 0 temp 1}℃", "separator_block_width": 20},
- ${endif}${endif}${endif}
-
- {"full_text": "", "separator": false, "separator_block_width": 6},
+ 
+ {"full_text": "", "separator": false, "separator_block_width": 6},
  {"full_text": "${exec pactl list sinks | grep '^[[:space:]]Volume:' | head -n 2 | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,'}", "separator_block_width": 20},
 
  ${if_existing /sys/class/power_supply/AC/online 1}
   ${if_match ${battery_percent}<20}
-    {"full_text": "", "color": "\#dc322f", "separator": false, "separator_block_width": 6},
-    {"full_text": "${battery_percent}%","color":"\#dc322f", "separator_block_width": 20},
+    {"full_text": "", "color": "\#cc9393", "separator": false, "separator_block_width": 6},
+    {"full_text": "${battery_percent}%","color":"\#cc9393", "separator_block_width": 20},
   ${else}${if_match ${battery_percent}<50}
-    {"full_text": "", "color": "\#b58900", "separator": false, "separator_block_width": 6},
-    {"full_text":"${battery_percent}%","color":"\#b58900", "separator_block_width": 20},
+    {"full_text": "", "color": "\#ffcfaf", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#ffcfaf", "separator_block_width": 20},
   ${else}${if_match ${battery_percent}>=50}
     {"full_text": "", "separator": false, "separator_block_width": 6},
     {"full_text":"${battery_percent}%", "separator_block_width": 20},
   ${endif}${endif}${endif}
  ${else}
   ${if_match ${battery_percent}<20}
-    {"full_text": "", "color": "\#dc322f", "separator": false, "separator_block_width": 6},
-    {"full_text": "${battery_percent}%","color":"\#dc322f", "separator_block_width": 20},
+    {"full_text": "", "color": "\#cc9393", "separator": false, "separator_block_width": 6},
+    {"full_text": "${battery_percent}%","color":"\#cc9393", "separator_block_width": 20},
   ${else}${if_match ${battery_percent}<50}
-    {"full_text": "", "color": "\#cd6900", "separator": false, "separator_block_width": 6},
-    {"full_text":"${battery_percent}%","color":"\#cd6900", "separator_block_width": 20},
+    {"full_text": "", "color": "\#dca3a3", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#dca3a3", "separator_block_width": 20},
   ${else}${if_match ${battery_percent}<75}
-    {"full_text": "", "color": "\#b58900", "separator": false, "separator_block_width": 6},
-    {"full_text":"${battery_percent}%","color":"\#b58900", "separator_block_width": 20},
+    {"full_text": "", "color": "\#ffcfaf", "separator": false, "separator_block_width": 6},
+    {"full_text":"${battery_percent}%","color":"\#ffcfaf", "separator_block_width": 20},
   ${else}${if_match ${battery_percent}<90}
     {"full_text": "", "separator": false, "separator_block_width": 6},
     {"full_text":"${battery_percent}%", "separator_block_width": 20},
@@ -74,5 +68,5 @@ TEXT
   ${endif}${endif}${endif}${endif}${endif}
  ${endif}
 
- {"full_text": "   ${time %a %b %d}"},
+ {"full_text": "   ${time %a %b %d}", "separator": false},
  {"full_text": "  ${time %H:%M}"}],

@@ -64,21 +64,21 @@ bar {
     tray_output             primary
     font pango: M+ 1m, FontAwesome, Ionicons, 10
     colors {
-         background #00040f
-         statusline #93a1a1
-         separator  #586e75
-         focused_workspace  #104E63 #104E63 #eee8d5
-         active_workspace   #104E63 #00040f #657b83
-         inactive_workspace #073642 #00040f #657b83
-         urgent_workspace   #002b36 #00040f #dc322f
+         background #2f2f2f
+         statusline #dcdccc
+         separator  #dcdccc
+         focused_workspace  #93b3a3 #2f2f2f #93b3a3
+         active_workspace   #ffcfaf #2f2f2f #ffcfaf
+         inactive_workspace #626262 #2f2f2f #dcdccc
+         urgent_workspace   #dca2a2 #2f2f2f #dca3a3
     }
 }
 
-# class                  border  backgr. text    indicator
-client.urgent            #073642 #104E63 #073642
-client.focused           #104E63 #104E63 #eee8d5
-client.focused_inactive  #104E63 #00040f #657b83
-client.unfocused         #073642 #00040f #657b83
+# class                     border  backgr. text    indicator
+client.focused              #7f9f7f #7f9f7f #303030 #ffcfaf
+client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
+client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
+client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
 
 # ========================================================================
 #                                  Modes
