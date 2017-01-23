@@ -2,6 +2,8 @@
 i3-castle
 =========
 
+This repo is deprecated. See https://github.com/storax/dotfiles
+
 i3 window manager configuration files.
 
 ------------
